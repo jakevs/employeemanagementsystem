@@ -1,11 +1,11 @@
 const util = require("util");
 const mysql = require("mysql");
 
-var PORT = process.env.PORT || 8080;
+// var PORT = process.env.PORT || 8080;
 
 const connection = mysql.createConnection({
   host: "localhost",
-  port: 3306,
+  // port: 3306,
   // Your username
   user: "root",
   // Your password

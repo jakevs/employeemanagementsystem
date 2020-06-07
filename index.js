@@ -23,62 +23,62 @@ async function loadMainPrompts() {
       choices: [
         {
           name: "View All Employees",
-          value: "VIEW_EMPLOYEES"
+          value: "VIEW_EMPLOYEES",
         },
         {
           name: "View All Employees By Department",
-          value: "VIEW_EMPLOYEES_BY_DEPARTMENT"
+          value: "VIEW_EMPLOYEES_BY_DEPARTMENT",
         },
         {
           name: "View All Employees By Manager",
-          value: "VIEW_EMPLOYEES_BY_MANAGER"
+          value: "VIEW_EMPLOYEES_BY_MANAGER",
         },
         {
           name: "Add Employee",
-          value: "ADD_EMPLOYEE"
+          value: "ADD_EMPLOYEE",
         },
         {
           name: "Remove Employee",
-          value: "REMOVE_EMPLOYEE"
+          value: "REMOVE_EMPLOYEE",
         },
         {
           name: "Update Employee Role",
-          value: "UPDATE_EMPLOYEE_ROLE"
+          value: "UPDATE_EMPLOYEE_ROLE",
         },
         {
           name: "Update Employee Manager",
-          value: "UPDATE_EMPLOYEE_MANAGER"
+          value: "UPDATE_EMPLOYEE_MANAGER",
         },
         {
           name: "View All Roles",
-          value: "VIEW_ROLES"
+          value: "VIEW_ROLES",
         },
         {
           name: "Add Role",
-          value: "ADD_ROLE"
+          value: "ADD_ROLE",
         },
         {
           name: "Remove Role",
-          value: "REMOVE_ROLE"
+          value: "REMOVE_ROLE",
         },
         {
           name: "View All Departments",
-          value: "VIEW_DEPARTMENTS"
+          value: "VIEW_DEPARTMENTS",
         },
         {
           name: "Add Department",
-          value: "ADD_DEPARTMENT"
+          value: "ADD_DEPARTMENT",
         },
         {
           name: "Remove Department",
-          value: "REMOVE_DEPARTMENT"
+          value: "REMOVE_DEPARTMENT",
         },
         {
           name: "Quit",
-          value: "QUIT"
-        }
-      ]
-    }
+          value: "QUIT",
+        },
+      ],
+    },
   ]);
 
   // Call the appropriate function depending on what the user chose
@@ -128,7 +128,7 @@ async function viewEmployeesByDepartment() {
 
   const departmentChoices = departments.map(({ id, name }) => ({
     name: name,
-    value: id
+    value: id,
   }));
 
   const { departmentId } = await prompt([
@@ -136,8 +136,8 @@ async function viewEmployeesByDepartment() {
       type: "list",
       name: "departmentId",
       message: "Which department would you like to see employees for?",
-      choices: departmentChoices
-    }
+      choices: departmentChoices,
+    },
   ]);
 
   const employees = await db.findAllEmployeesByDepartment(departmentId);
@@ -153,7 +153,7 @@ async function viewEmployeesByManager() {
 
   const managerChoices = managers.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
-    value: id
+    value: id,
   }));
 
   const { managerId } = await prompt([
@@ -161,8 +161,8 @@ async function viewEmployeesByManager() {
       type: "list",
       name: "managerId",
       message: "Which employee do you want to see direct reports for?",
-      choices: managerChoices
-    }
+      choices: managerChoices,
+    },
   ]);
 
   const employees = await db.findAllEmployeesByManager(managerId);
@@ -183,7 +183,7 @@ async function removeEmployee() {
 
   const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
-    value: id
+    value: id,
   }));
 
   const { employeeId } = await prompt([
@@ -191,8 +191,8 @@ async function removeEmployee() {
       type: "list",
       name: "employeeId",
       message: "Which employee do you want to remove?",
-      choices: employeeChoices
-    }
+      choices: employeeChoices,
+    },
   ]);
 
   await db.removeEmployee(employeeId);
@@ -207,7 +207,7 @@ async function updateEmployeeRole() {
 
   const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
-    value: id
+    value: id,
   }));
 
   const { employeeId } = await prompt([
@@ -215,15 +215,15 @@ async function updateEmployeeRole() {
       type: "list",
       name: "employeeId",
       message: "Which employee's role do you want to update?",
-      choices: employeeChoices
-    }
+      choices: employeeChoices,
+    },
   ]);
 
   const roles = await db.findAllRoles();
 
   const roleChoices = roles.map(({ id, title }) => ({
     name: title,
-    value: id
+    value: id,
   }));
 
   const { roleId } = await prompt([
@@ -231,8 +231,8 @@ async function updateEmployeeRole() {
       type: "list",
       name: "roleId",
       message: "Which role do you want to assign the selected employee?",
-      choices: roleChoices
-    }
+      choices: roleChoices,
+    },
   ]);
 
   await db.updateEmployeeRole(employeeId, roleId);
@@ -247,7 +247,7 @@ async function updateEmployeeManager() {
 
   const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
-    value: id
+    value: id,
   }));
 
   const { employeeId } = await prompt([
@@ -255,15 +255,15 @@ async function updateEmployeeManager() {
       type: "list",
       name: "employeeId",
       message: "Which employee's manager do you want to update?",
-      choices: employeeChoices
-    }
+      choices: employeeChoices,
+    },
   ]);
 
   const managers = await db.findAllPossibleManagers(employeeId);
 
   const managerChoices = managers.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
-    value: id
+    value: id,
   }));
 
   const { managerId } = await prompt([
@@ -272,8 +272,8 @@ async function updateEmployeeManager() {
       name: "managerId",
       message:
         "Which employee do you want to set as manager for the selected employee?",
-      choices: managerChoices
-    }
+      choices: managerChoices,
+    },
   ]);
 
   await db.updateEmployeeManager(employeeId, managerId);
@@ -297,24 +297,24 @@ async function addRole() {
 
   const departmentChoices = departments.map(({ id, name }) => ({
     name: name,
-    value: id
+    value: id,
   }));
 
   const role = await prompt([
     {
       name: "title",
-      message: "What is the name of the role?"
+      message: "What is the name of the role?",
     },
     {
       name: "salary",
-      message: "What is the salary of the role?"
+      message: "What is the salary of the role?",
     },
     {
       type: "list",
       name: "department_id",
       message: "Which department does the role belong to?",
-      choices: departmentChoices
-    }
+      choices: departmentChoices,
+    },
   ]);
 
   await db.createRole(role);
@@ -329,7 +329,7 @@ async function removeRole() {
 
   const roleChoices = roles.map(({ id, title }) => ({
     name: title,
-    value: id
+    value: id,
   }));
 
   const { roleId } = await prompt([
@@ -338,8 +338,8 @@ async function removeRole() {
       name: "roleId",
       message:
         "Which role do you want to remove? (Warning: This will also remove employees)",
-      choices: roleChoices
-    }
+      choices: roleChoices,
+    },
   ]);
 
   await db.removeRole(roleId);
@@ -362,8 +362,8 @@ async function addDepartment() {
   const department = await prompt([
     {
       name: "name",
-      message: "What is the name of the department?"
-    }
+      message: "What is the name of the department?",
+    },
   ]);
 
   await db.createDepartment(department);
@@ -378,7 +378,7 @@ async function removeDepartment() {
 
   const departmentChoices = departments.map(({ id, name }) => ({
     name: name,
-    value: id
+    value: id,
   }));
 
   const { departmentId } = await prompt({
@@ -386,7 +386,7 @@ async function removeDepartment() {
     name: "departmentId",
     message:
       "Which department would you like to remove? (Warning: This will also remove associated roles and employees)",
-    choices: departmentChoices
+    choices: departmentChoices,
   });
 
   await db.removeDepartment(departmentId);
@@ -403,31 +403,31 @@ async function addEmployee() {
   const employee = await prompt([
     {
       name: "first_name",
-      message: "What is the employee's first name?"
+      message: "What is the employee's first name?",
     },
     {
       name: "last_name",
-      message: "What is the employee's last name?"
-    }
+      message: "What is the employee's last name?",
+    },
   ]);
 
   const roleChoices = roles.map(({ id, title }) => ({
     name: title,
-    value: id
+    value: id,
   }));
 
   const { roleId } = await prompt({
     type: "list",
     name: "roleId",
     message: "What is the employee's role?",
-    choices: roleChoices
+    choices: roleChoices,
   });
 
   employee.role_id = roleId;
 
   const managerChoices = employees.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
-    value: id
+    value: id,
   }));
   managerChoices.unshift({ name: "None", value: null });
 
@@ -435,7 +435,7 @@ async function addEmployee() {
     type: "list",
     name: "managerId",
     message: "Who is the employee's manager?",
-    choices: managerChoices
+    choices: managerChoices,
   });
 
   employee.manager_id = managerId;
