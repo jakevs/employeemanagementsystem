@@ -23,7 +23,11 @@ npm i
 
 ## Usage
 
-It is an open project and everyone can contribute!
+It is an open project and everyone can contribute! Run the following command to use command line:
+
+```
+npm start
+```
 
 ## Contributing
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "console.table": "^0.10.0",
     "inquirer": "^7.1.0",
     "keypress": "^0.2.1",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "mysql2": "^2.1.0"
   }
 }
