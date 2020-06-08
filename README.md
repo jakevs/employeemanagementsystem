@@ -4,7 +4,7 @@
 
 ## Description
 
-This command line interface (CLI) application was designed for a user to create keep track of, view and manage the employees in a company. It can be used for personal, or professional purposes. This will help a user organize their thoughts and ensure that any task they need to be complete will be done. This was made with backend code using Javascript, Node.js, and mySQL database dependencies.
+This command line interface (CLI) application was designed for a user to create, view and organize the employees and their roles in a company. It can be used for personal, or professional purposes. This will help developers and non-developers interact with information in databases. This was made with backend code using Javascript, Node.js, Inquirer and mySQL databases.
 
 ## Table of Contents
 
