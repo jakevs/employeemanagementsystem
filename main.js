@@ -8,9 +8,7 @@ require("console.table");
 const connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
-  // Your username
   user: "root",
-  // Your password
   password: "",
   database: "employees"
 });
@@ -38,6 +36,10 @@ function questions() {
         "View All Employees",
         "View All Roles",
         "View All Departments",
+        "Add Employee",
+        "Add Role",
+        "Add Department",
+        "Update Role",
         "Goodbye"
       ]
     })
@@ -62,6 +64,16 @@ function questions() {
 // const { again, ...answers } = await inquirer.prompt(prompts);
 // const newInputs = [...inputs, answers];
 // return again ? questions(newInputs) : newInputs;
+function noQuery(query) {
+  connection.query(query, function (error, resolve) {
+    if (error) {
+      throw error;
+    }
+    console.log(resolve);
+    questions();
+    return "Goodbye!";
+  });
+}
 
 function viewAllEmployees() {
   const employees =
@@ -82,3 +94,4 @@ function viewAllDepartments() {
   console.table(departments);
 }
 questions();
+// module.exports = connection;
