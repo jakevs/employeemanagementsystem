@@ -84,7 +84,7 @@ async function loadMainPrompts() {
   console.log(choice);
   // Call the appropriate function depending on what the user chose
 
-  switch (choice.value) {
+  switch (choice.choice) {
     case "VIEW_EMPLOYEES":
       viewEmployees();
       break;

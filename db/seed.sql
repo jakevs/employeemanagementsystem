@@ -25,7 +25,7 @@ INSERT INTO employee
 VALUES
     ('Molly', 'Van Slyke', 1, NULL),
     ('James', 'Van Slyke', 2, 1),
-    ('Scott', 'Shreders', 3),
+    ('Scott', 'Shreders', 2, 1),
     ('Ashley', 'Rodriguez', 3, NULL),
     ('Kevin', 'Tupik', 4, 3),
     ('Kunal', 'Singh', 5, NULL),
