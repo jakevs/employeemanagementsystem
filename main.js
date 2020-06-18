@@ -192,8 +192,52 @@ function addEmployee() {
               questions();
             }
           );
-          console.log("Employee has been added!");
+          console.log("New Employee Added.");
         });
   })
 }
+
+function updateEmployeeRole() {
+  connection.query(`SELECT * FROM employee`, (err, employee) => {
+      if (err) throw err;
+      const allEmployees = employee.map(e => {
+          return {
+              name: `${e.first_name} ${e.last_name}`,
+              value: e.id
+          }
+      });
+      connection.query(`SELECT title, id FROM role`, (err, role) => {
+          if (err) throw err;
+          const updateRole = role.map(r => {
+              return {
+                  name: r.title,
+                  value: r.id
+              }
+          })
+          inquirer
+              .prompt([
+                  {
+                      type: "list",
+                      name: "employee",
+                      message: "Which Employee Role would you like to update?",
+                      choices: allEmployees
+                  },
+                  {
+                      name: "role",
+                      type: "list",
+                      message: "What role are you adding?",
+                      choices: updateRole
+                  }
+              ]).then((res) => {
+                  connection.query(`UPDATE employee SET role_id=${res.role} WHERE id=${res.employee}`, (err, res) => {
+                      if (err) throw err;
+                      questions();
+                  });
+              });
+      });
+      
+         
+  });
+}
+
 // module.exports = connection;
