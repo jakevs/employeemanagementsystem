@@ -25,6 +25,10 @@ connection.query = util.promisify(connection.query);
 // init();
 
 // }
+
+questions();
+
+
 function questions() {
   const prompts = false;
   inquirer
@@ -43,24 +47,31 @@ function questions() {
         "Goodbye"
       ]
     })
-    .then(function (selection) {
-      switch (selection.actions) {
-        case "View All Employees":
-          viewAllEmployees();
-          break;
-        case "View All Roles":
-          viewAllRoles();
-          break;
-        case "View All Departments":
-          viewAllDepartments();
-          break;
-        case "Goodbye":
-          break;
-        default:
-          break;
-      }
+    .then((response) => {
+  switch (response.actions) {
+    case "View All Employees":
+      viewAllEmployees();
+      break;
+      case "View All Roles":
+      viewAllRoles();
+      break;    case "View All Departments":
+      viewAllDepartments();
+      break;    case "Add Employee":
+      addEmployee();
+      break;    case "Add Roles":
+      addRoles();
+      break;    case "Add Department":
+      addDepartment();
+      break;    case "Add Role":
+      addRole();
+      break;
+    default:
+      noQuery();
+      break;
+  }
+      
     });
-}
+
 // const { again, ...answers } = await inquirer.prompt(prompts);
 // const newInputs = [...inputs, answers];
 // return again ? questions(newInputs) : newInputs;
@@ -92,6 +103,5 @@ function viewAllDepartments() {
     "SELECT department.id, department.name, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id GROUP BY department.id, department.name;";
 
   console.table(departments);
-}
-questions();
+}}
 // module.exports = connection;
