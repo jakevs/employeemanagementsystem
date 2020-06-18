@@ -1,34 +1,13 @@
 use employees;
 
-INSERT INTO department
-    (name)
-VALUES
-    ('Sales'),
-    ('Engineering'),
-    ('Finance'),
-    ('Legal');
+  
+INSERT INTO department (department_name)
+VALUES ("My House"),("Office Heads");
 
-INSERT INTO role
-    (title, salary, department_id)
-VALUES
-    ('Sales Lead', 100000, 1),
-    ('Salesperson', 80000, 1),
-    ('Lead Engineer', 150000, 2),
-    ('Software Engineer', 120000, 2),
-    ('Account Manager', 160000, 3),
-    ('Accountant', 125000, 3),
-    ('Legal Team Lead', 250000, 4),
-    ('Lawyer', 190000, 4);
 
-INSERT INTO employee
-    (first_name, last_name, role_id, manager_id)
-VALUES
-    ('Molly', 'Van Slyke', 1, NULL),
-    ('James', 'Van Slyke', 2, 1),
-    ('Scott', 'Shreders', 2, 1),
-    ('Ashley', 'Rodriguez', 3, NULL),
-    ('Kevin', 'Tupik', 4, 3),
-    ('Kunal', 'Singh', 5, NULL),
-    ('Malia', 'Brown', 6, 5),
-    ('Sarah', 'Lourd', 7, NULL),
-    ('Tom', 'Allen', 8, 7);
+INSERT INTO role (title, salary, department_id)
+VALUES ("Deputy Director", 71000.00, 1),("Director", 90000.00, 2),("Singer", 35000.00, 1),("Trouble Maker", 40000.00, 2);
+
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("LeVALUES ("Molly", "Van Slyke", 1, 1),("James", "Van Slyke", 2, NULL),("Maddy", "Van Slyke", 3, NULL),("Grayson", "Van Slyke", 4, NULL);

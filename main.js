@@ -30,78 +30,54 @@ questions();
 
 
 function questions() {
-  const prompts = false;
   inquirer
-    .prompt({
+  .prompt({
       type: "list",
-      name: "actions",
-      message: "What would you like to select first?",
+      name: "action",
+      message: "What would you like to do?",
       choices: [
-        "View All Employees",
-        "View All Roles",
-        "View All Departments",
-        "Add Employee",
-        "Add Role",
-        "Add Department",
-        "Update Role",
-        "Goodbye"
+          "View All Departments",
+          "View All Roles",
+          "View All Employees",
+          "Add Department",
+          "Add Role",
+          "Add Employee",
+          "Update Employee Role",
+          "Exit"
       ]
-    })
-    .then((response) => {
-  switch (response.actions) {
-    case "View All Employees":
-      viewAllEmployees();
-      break;
-      case "View All Roles":
-      viewAllRoles();
-      break;    case "View All Departments":
-      viewAllDepartments();
-      break;    case "Add Employee":
-      addEmployee();
-      break;    case "Add Roles":
-      addRoles();
-      break;    case "Add Department":
-      addDepartment();
-      break;    case "Add Role":
-      addRole();
-      break;
-    default:
-      noQuery();
-      break;
-  }
-      
-    });
 
-// const { again, ...answers } = await inquirer.prompt(prompts);
-// const newInputs = [...inputs, answers];
-// return again ? questions(newInputs) : newInputs;
-function noQuery(query) {
-  connection.query(query, function (error, resolve) {
-    if (error) {
-      throw error;
-    }
-    console.log(resolve);
-    questions();
-    return "Goodbye!";
-  });
+  }).then((response) => {
+      switch (response.action) {
+          case "View All Departments":
+              viewAllDepartments();
+              break;
+          case "View All Roles":
+              viewAllRoles();
+              break;
+          case "View All Employees":
+              viewAllEmployees();
+              break;
+          case "Add Department":
+              addDepartment();
+              break;
+          case "Add Role":
+              addRole();
+              break;
+          case "Add Employee":
+              addEmployee();
+              break;
+          case "Update Employee Role":
+              updateEmployeeRole();
+              break;
+          default :
+              exitApp();
+              break;
+      }
+  })
 }
 
-function viewAllEmployees() {
-  const employees =
-    "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;";
-
-  console.table(employees);
+function exitApp() {
+console.log("Ending Program!");
+process.exit();
 }
-function viewAllRoles() {
-  const roles =
-    "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id;";
-
-  console.table(roles);
-}
-function viewAllDepartments() {
-  const departments =
-    "SELECT department.id, department.name, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id GROUP BY department.id, department.name;";
-
-  console.table(departments);
-}}
 // module.exports = connection;
