@@ -104,4 +104,96 @@ function viewAllEmployees() {
     questions();
   })
 }
+
+function addDepartment() {
+  inquirer.prompt([{
+    name: "department",
+    type: "input",
+    message: "Add New Department - "
+  }])
+  .then((res) => {
+    connection.query(`INSERT INTO department(department_name) VALUES ("${res.department}")`, (err, res) => {
+      if (err) throw err;
+      questions();
+      console.log("New Deparment Added.");
+    })
+  });
+}
+
+function addRole() {
+  connection.query(`SELECT * FROM department`, (err, department) => {
+    if (err) throw err;
+    const departmentArr = department.map(d => {
+      return {
+        name: d.department_name,
+        value: d.id
+      }
+    })
+  })
+  inquirer.prompt([{
+    type: "input",
+    name: "title",
+    message: "What is the new role's title?"
+  },
+  {
+    type: "input",
+    name: "salary",
+    message: "What is the new salary?"
+  },
+  {
+    type: "list",
+    name: "department",
+    message: "Which department is the new employee entering?",
+    choices: departmentArr
+  }
+]).then((res) => {
+  connection.query(`INSERT INTO role(title, salary, department_id) VALUES ("${res.title}", "${res.salary}", "${res.department}")`, (err, res) => {
+    if (err) throw err;
+    questions();
+  })
+  console.log("New Role Added.")
+});
+}
+
+function addEmployee() {
+  connection.query(`SELECT * FROM role`, (err, role) => {
+      if (err) throw err;
+      const roleArr = role.map(r => {
+          return {
+              name: r.title,
+              value: r.id
+          }
+      })
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "first_name",
+            message: "What is the first name of the new employee?",
+          },
+          {
+            type: "input",
+            name: "last_name",
+            message: "What the last name of the new employee?",
+          },
+          {
+            type: "list",
+            name: "role_id",
+            message: "What is the role of this new employee?",
+            choices: roleArr,
+          },
+        ])
+        .then((res) => {
+          connection.query(
+            `INSERT INTO employee(first_name, last_name, role_id) 
+          VALUES ("${res.first_name}", "${res.last_name}", ${res.role_id})`,
+            (err, res) => {
+              if (err) throw err;
+              questions();
+            }
+          );
+          console.log("Employee has been added!");
+        });
+  })
+}
 // module.exports = connection;
