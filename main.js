@@ -77,7 +77,31 @@ function questions() {
 }
 
 function exitApp() {
-console.log("Ending Program!");
+console.log("Goodbye!");
 process.exit();
+}
+
+function viewAllDepartments() {
+  connection.query("SELECT * FROM department", function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    questions();
+  })
+}
+
+function viewAllRoles() {
+  connection.query("SELECT * FROM role", function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    questions();
+  })
+}
+
+function viewAllEmployees() {
+  connection.query("SELECT * FROM employee", function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    questions();
+  })
 }
 // module.exports = connection;
