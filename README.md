@@ -35,7 +35,7 @@ Please send an email if you wish to contribute.
 
 ## Questions
 
-  <img src="https://avatars.githubusercontent.com/jakevs" style="width: 40px; height: 40px; border-radius:100%;">
+  <img src="https://avatars.githubusercontent.com/jakevs" style="width: 30px; height: 30px; border-radius:100%;">
 
 
 If you have any questions about the repository, or an open issue, please contact [jakevs](https://github.com/jakevs/) directly at jakevs3@gmail.com.
