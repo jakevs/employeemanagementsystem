@@ -122,37 +122,42 @@ function addDepartment() {
 
 function addRole() {
   connection.query(`SELECT * FROM department`, (err, department) => {
-    if (err) throw err;
-    const departmentArr = department.map(d => {
-      return {
-        name: d.department_name,
-        value: d.id
-      }
-    })
+      if (err) throw err;
+      const departmentList = department.map(d => {
+          return {
+              name: d.department_name,
+              value: d.id
+          }
+      })
+      inquirer.prompt([
+          {
+              type: "input",
+              name: "title",
+              message: "What is the title of this new role?"
+          },
+          {
+              type: "input",
+              name: "salary",
+              message: "What is the salary of this role?"
+          },
+          {
+              type: "list",
+              name: "department",
+              message: "What department would you like to add this to?",
+              choices: departmentList
+          }
+      ]).then((res) => {
+          connection.query(`INSERT INTO role(title, salary, department_id) VALUES ("${res.title}","${res.salary}","${res.department}")`, (err, res) => {
+              if (err) throw err;
+              questions();
+          })
+          console.log("Role has been added!");
+      })
+
+  
   })
-  inquirer.prompt([{
-    type: "input",
-    name: "title",
-    message: "What is the new role's title?"
-  },
-  {
-    type: "input",
-    name: "salary",
-    message: "What is the new salary?"
-  },
-  {
-    type: "list",
-    name: "department",
-    message: "Which department is the new employee entering?",
-    choices: departmentArr
-  }
-]).then((res) => {
-  connection.query(`INSERT INTO role(title, salary, department_id) VALUES ("${res.title}", "${res.salary}", "${res.department}")`, (err, res) => {
-    if (err) throw err;
-    questions();
-  })
-  console.log("New Role Added.")
-});
+ 
+      
 }
 
 function addEmployee() {
