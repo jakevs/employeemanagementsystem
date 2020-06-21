@@ -2,7 +2,7 @@ const util = require("util");
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 // const logo = require("asciiart-logo");
-const db = require("./db");
+// const db = require("./db");
 require("console.table");
 
 const connection = mysql.createConnection({
@@ -17,7 +17,7 @@ connection.connect();
 
 // Setting up connection.query to use promises instead of callbacks
 // This allows us to use the async/await syntax
-connection.query = util.promisify(connection.query);
+// connection.query = util.promisify(connection.query);
 // async function init() {
 //   const logoText = await logo({ name: "Employee Management System" }).render();
 
