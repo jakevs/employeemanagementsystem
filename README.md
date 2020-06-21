@@ -26,7 +26,7 @@ npm i
 It is an open project and everyone can contribute! Run the following command to use command line:
 
 ```
-npm start
+node main.js
 ```
 
 ## Contributing
@@ -34,5 +34,8 @@ npm start
 Please send an email if you wish to contribute.
 
 ## Questions
+
+  <img src="https://avatars.githubusercontent.com/jakevs" style="width: 45px; height: 45px; border-radius:100%;">
+
 
 If you have any questions about the repository, or an open issue, please contact [jakevs](https://github.com/jakevs/) directly at jakevs3@gmail.com.
