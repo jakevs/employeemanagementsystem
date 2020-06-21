@@ -12,7 +12,7 @@ VALUES
 ("Deputy Director", 71000.00, 1),
 ("Director", 90000.00, 2),
 ("Singer", 35000.00, 1),
-("Trouble Maker", 40000.00, 2);
+("Trouble Maker", 400000.00, 2);
 
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)

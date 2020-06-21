@@ -1,7 +1,7 @@
 const util = require("util");
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-// const logo = require("asciiart-logo");
+const logo = require("asciiart-logo");
 // const db = require("./db");
 require("console.table");
 
@@ -19,9 +19,9 @@ connection.connect();
 // This allows us to use the async/await syntax
 // connection.query = util.promisify(connection.query);
 // async function init() {
-//   const logoText = await logo({ name: "Employee Management System" }).render();
+  const logoText = logo({ name: "Employee Management System" }).render();
 
-//   console.log(logoText);
+  console.log(logoText);
 // init();
 
 // }
